@@ -1,14 +1,15 @@
+import os
 from .compile_python import CompilerPython
 from .compile_cpp import CompilerCpp
 
 
 class Compile:
     def __init__(self, sourcepath):
-        extension = sourcepath.split('.')[-1]
+        extension = os.path.splitext(sourcepath)[-1]
 
-        if extension == 'py':
+        if extension == '.py':
             Compiler = CompilerPython
-        elif extension == 'cpp':
+        elif extension == '.cpp':
             Compiler = CompilerCpp
         else:
             raise Exception('Unknown Language')
