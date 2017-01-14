@@ -1,0 +1,4 @@
+[submodule "isolate"]
+	path = isolate
+	url = https://github.com/cms-dev/isolate.git
+	branch = upstream
