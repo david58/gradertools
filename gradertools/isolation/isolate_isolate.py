@@ -14,11 +14,10 @@ class IsolateIsolate(IsolateInterface):
         isolate_args = []
         for ev in envvariables:
             isolate_args.append('--env=' + ev)
-        for dir in directories:
-            isolate_args.append('--dir=' + dir)
+        for d in directories:
+            isolate_args.append('--dir=' + d)
         if allowmultiprocess:
             isolate_args.append('--processes')
-        #print(['../isolate/isolate', '--env=PATH=/usr/bin']+isolate_args+['--run', '--']+[command]+parameters)
         out = subprocess.run(['../isolate/isolate']+isolate_args+['--run', '--']+[command]+parameters,
                              check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return os.path.join(box, 'box'), out.stdout, out.stderr

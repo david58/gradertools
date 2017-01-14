@@ -12,17 +12,18 @@ class Isolate:
 
         self._isol = Isolator('isolate')
 
-    def isolate(self, command, files=None, parameters=None, envvariables=None, directories=None, allowmultiprocess=None):
+    def isolate(self, command, files=None, parameters=None, envvariables=None, directories=None,
+                allowmultiprocess=None):
         if files is None:
-            files=[]
+            files = []
         if parameters is None:
-            parameters=[]
+            parameters = []
         if envvariables is None:
-            envvariables=[]
+            envvariables = []
         if directories is None:
             directories = []
         if allowmultiprocess is None:
-            allowmultiprocess=False
+            allowmultiprocess = False
         return self._isol.isolate(files, command, parameters, envvariables, directories, allowmultiprocess)
 
     def clean(self):
