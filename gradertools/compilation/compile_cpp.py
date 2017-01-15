@@ -10,7 +10,7 @@ class CompilerCpp(CompilerInterface):
         isol = Isolate()
         command = '/usr/bin/g++'
         args = ['-ocompiledbinary', os.path.basename(sp)]
-        envvars = ['PATH=/usr/bin', 'HOME=/']
+        envvars = ['PATH=/usr/bin']
         (box, out, err) = isol.isolate(files=[sp], command=command, parameters=args, envvariables=envvars, allowmultiprocess=True)
         shutil.copy(os.path.join(box, 'compiledbinary'), 'compiledbinary')
         self._binarypath = 'compiledbinary'

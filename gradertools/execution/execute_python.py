@@ -9,7 +9,7 @@ class ExecutePython(ExecuteInterface):
         isol = Isolate()
         command = '/usr/bin/python3'
         args = [os.path.basename(bp)]
-        envvars = ['PATH=/usr/bin', 'HOME=/']
+        envvars = ['PATH=/usr/bin', 'HOME=/box']
         dirs = ['/etc']
         (box, out, err) = isol.isolate(files=[bp], command=command, parameters=args, envvariables=envvars,
                                        directories=dirs)
