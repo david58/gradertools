@@ -4,6 +4,7 @@ class CompilerInterface:
         self.sourcepath = sourcepath
         self._binarypath = None
         self._status = None
+        self._error = None
     
     def compile(self):
         raise NotImplementedError
@@ -13,3 +14,6 @@ class CompilerInterface:
 
     def get_status(self):
         return self._status
+
+    def get_error(self):
+        return self._error

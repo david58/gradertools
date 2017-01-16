@@ -18,7 +18,11 @@ class CompilerCpp(CompilerInterface):
             self._status = 'CTLE'
         else:
             self._status = 'CE'
-        self._status = isol.status
+            out = str(isol.stdout, 'utf-8', errors='replace')
+            if len(out) > 10000:
+                self._error = out[:10000] + '\n\n(Compiler output too long, truncated.)\n'
+            else:
+                self._error = out
         if self._status == 'OK':
             box = isol.boxdir
             try:

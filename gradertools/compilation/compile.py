@@ -24,5 +24,9 @@ class Compile:
     def status(self):
         return self._comp.get_status()
 
+    @property
+    def errormessage(self):
+        return self._comp.get_error()
+
     def compile(self):
         self._comp.compile()

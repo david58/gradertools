@@ -65,3 +65,7 @@ class Isolate:
     @property
     def exitcode(self):
         return self._isol.get_exitcode()
+
+    @property
+    def stdout(self):
+        return  self._isol.get_stdout()
