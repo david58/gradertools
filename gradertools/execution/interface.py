@@ -1,6 +1,8 @@
 class ExecuteInterface:
-    def __init__(self, binarypath):
+    def __init__(self, binarypath, inputfile, outputfile):
         self.binarypath = binarypath
+        self.inputfile = inputfile
+        self.outputfile = outputfile
         self._status = None
 
     def execute(self):
