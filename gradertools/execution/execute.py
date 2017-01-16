@@ -1,10 +1,11 @@
+import os
 from .execute_python import ExecutePython
 from .execute_binary import ExecuteBinary
 
 
 class Execute:
     def __init__(self, binarypath):
-        extension = binarypath.split('.')[-1]
+        extension = os.path.splitext(binarypath)[-1]
 
         if extension == 'py':
             Executor = ExecutePython
@@ -15,3 +16,7 @@ class Execute:
 
     def execute(self):
         self._exec.execute()
+
+    @property
+    def status(self):
+        return self._exec.get_status()

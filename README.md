@@ -12,7 +12,7 @@ $git submodule update --init
 ##Install
 Inside isolate folder run
 ```bash
-$make
+$make isolate
 ```
 ##Run
 Need to by run as root.

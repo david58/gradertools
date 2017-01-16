@@ -20,5 +20,9 @@ class Compile:
     def binarypath(self):
         return self._comp.get_binarypath()
 
+    @property
+    def status(self):
+        return self._comp.get_status()
+
     def compile(self):
         self._comp.compile()

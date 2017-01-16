@@ -13,7 +13,7 @@ class Isolate:
         self._isol = Isolator('isolate')
 
     def isolate(self, command, files=None, parameters=None, envvariables=None, directories=None,
-                allowmultiprocess=None):
+                allowmultiprocess=None, stdinfile=None, stdoutfile=None):
         if files is None:
             files = []
         if parameters is None:
@@ -24,7 +24,44 @@ class Isolate:
             directories = []
         if allowmultiprocess is None:
             allowmultiprocess = False
-        return self._isol.isolate(files, command, parameters, envvariables, directories, allowmultiprocess)
+        return self._isol.isolate(files, command, parameters, envvariables, directories, allowmultiprocess, stdinfile,
+                                  stdoutfile)
 
     def clean(self):
         self._isol.clean()
+
+    @property
+    def status(self):
+        return self._isol.get_status()
+
+    @property
+    def boxdir(self):
+        return self._isol.get_boxdir()
+
+    @property
+    def time(self):
+        return self._isol.get_time()
+
+    @property
+    def walltime(self):
+        return self._isol.get_walltime()
+
+    @property
+    def maxrss(self):
+        return self._isol.get_maxrss()
+
+    @property
+    def cswv(self):
+        return self._isol.get_cswv()
+
+    @property
+    def cswf(self):
+        return self._isol.get_cswf()
+
+    @property
+    def cgmem(self):
+        return self._isol.get_cgmem()
+
+    @property
+    def exitcode(self):
+        return self._isol.get_exitcode()

@@ -9,9 +9,21 @@ class CompilerCpp(CompilerInterface):
         sp = self.sourcepath
         isol = Isolate()
         command = '/usr/bin/g++'
-        args = ['-ocompiledbinary', os.path.basename(sp)]
+        args = ['-static', '-std=gnu++14', '-O2', '-Wall', '-Wextra', '-ocompiledbinary', os.path.basename(sp)]
         envvars = ['PATH=/usr/bin']
-        (box, out, err) = isol.isolate(files=[sp], command=command, parameters=args, envvariables=envvars, allowmultiprocess=True)
-        shutil.copy(os.path.join(box, 'compiledbinary'), 'compiledbinary')
-        self._binarypath = 'compiledbinary'
+        isol.isolate(files=[sp], command=command, parameters=args, envvariables=envvars, allowmultiprocess=True)
+        if isol.status == 'OK':
+            self._status = 'OK'
+        elif isol.status == 'TO':
+            self._status = 'CTLE'
+        else:
+            self._status = 'CE'
+        self._status = isol.status
+        if self._status == 'OK':
+            box = isol.boxdir
+            try:
+                shutil.copy(os.path.join(box, 'compiledbinary'), 'compiledbinary')
+                self._binarypath = 'compiledbinary'
+            except:
+                self._status = 'IN'
         isol.clean()
