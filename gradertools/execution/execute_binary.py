@@ -12,7 +12,7 @@ class ExecuteBinary(ExecuteInterface):
         isol = Isolate()
         command = './'+os.path.basename(bp)
         isol.isolate(files=[bp, infile], command=command, stdinfile=os.path.basename(infile), stdoutfile='output.out')
-
+        self._time = isol.time
         self._status = 'OK'
         if isol.status == 'TO':
             self._status = 'TLE'

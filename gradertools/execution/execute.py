@@ -20,3 +20,7 @@ class Execute:
     @property
     def status(self):
         return self._exec.get_status()
+
+    @property
+    def time(self):
+        return self._exec.get_time()

@@ -7,7 +7,7 @@ print('compilation: ' + c.status)
 bp = c.binarypath
 e = Execute(bp, 'input.in', 'outpy.out')
 e.execute()
-print('execution: ' + e.status)
+print('execution:', e.status, 'time:', e.time)
 
 print('c++')
 c = Compile('source.cpp')
@@ -17,4 +17,4 @@ if c.status == 'OK':
     bp = c.binarypath
     e = Execute(bp, 'input.in', 'outcpp.out')
     e.execute()
-    print('execution: ' + e.status)
+    print('execution:', e.status, 'time:', e.time)

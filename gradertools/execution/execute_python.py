@@ -16,6 +16,7 @@ class ExecutePython(ExecuteInterface):
         dirs = ['/etc']
         isol.isolate(files=[bp, infile], command=command, parameters=args, envvariables=envvars, directories=dirs,
                      stdinfile=os.path.basename(infile), stdoutfile='output.out')
+        self._time = isol.time
         self._status = 'OK'
         if isol.status == 'TO':
             self._status = 'TLE'
