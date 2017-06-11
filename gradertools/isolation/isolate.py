@@ -68,4 +68,4 @@ class Isolate:
 
     @property
     def stdout(self):
-        return  self._isol.get_stdout()
+        return self._isol.get_stdout()

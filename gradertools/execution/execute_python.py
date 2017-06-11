@@ -14,18 +14,12 @@ class ExecutePython(ExecuteInterface):
         args = [os.path.basename(bp)]
         envvars = ['PATH=/usr/bin', 'HOME=/box']
         dirs = ['/etc']
-        isol.isolate(files=[bp, infile], command=command, parameters=args, envvariables=envvars, directories=dirs,
-                     stdinfile=os.path.basename(infile), stdoutfile='output.out')
+        isol.isolate(
+            files=[bp, infile], command=command, parameters=args, envvariables=envvars, directories=dirs,
+            stdinfile=os.path.basename(infile), stdoutfile='output.out'
+        )
         self._time = isol.time
-        self._status = 'OK'
-        if isol.status == 'TO':
-            self._status = 'TLE'
-        elif isol.status == 'SG':
-            self._status = 'EXC'
-        elif isol.status == 'RE':
-            self._status = 'EXC'
-        elif isol.status == 'XX':
-            self._status = 'IN'
+        self._status = isol.status
 
         if self._status == 'OK':
             box = isol.boxdir
