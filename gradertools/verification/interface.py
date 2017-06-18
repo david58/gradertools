@@ -6,7 +6,7 @@ class VerificateInterface:
         self._status = None
         self._message = None
 
-    def verificate(self):
+    def verificate(self, isolator):
         raise NotImplementedError
 
     def get_status(self):

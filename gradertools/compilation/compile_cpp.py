@@ -1,13 +1,11 @@
 import shutil
 import os
 from .interface import CompilerInterface
-from ..isolation.isolate import Isolate
 
 
 class CompilerCpp(CompilerInterface):
-    def compile(self):
+    def compile(self, isol):
         sp = self.sourcepath
-        isol = Isolate()
         command = '/usr/bin/g++'
         args = ['-static', '-std=gnu++14', '-O2', '-Wall', '-Wextra', '-ocompiledbinary', os.path.basename(sp)]
         envvars = ['PATH=/usr/bin']
@@ -26,4 +24,4 @@ class CompilerCpp(CompilerInterface):
                 self._binarypath = 'compiledbinary'
             except:
                 self._status = 'IN'
-        isol.clean()
+        #isol.clean()

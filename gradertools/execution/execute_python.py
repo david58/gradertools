@@ -1,15 +1,13 @@
 import os
 import shutil
 from .interface import ExecuteInterface
-from ..isolation.isolate import Isolate
 
 
 class ExecutePython(ExecuteInterface):
-    def execute(self):
+    def execute(self, isol):
         bp = self.binarypath
         infile = self.inputfile
         outfile = self.outputfile
-        isol = Isolate()
         command = '/usr/bin/python3'
         args = [os.path.basename(bp)]
         envvars = ['PATH=/usr/bin', 'HOME=/box']
@@ -27,4 +25,4 @@ class ExecutePython(ExecuteInterface):
                 shutil.copy(os.path.join(box, 'output.out'), outfile)
             except:
                 self._status = 'IN'
-        isol.clean()
+        #isol.clean()

@@ -6,7 +6,7 @@ class ExecuteInterface:
         self._status = None
         self._time = None
 
-    def execute(self):
+    def execute(self, isolator):
         raise NotImplementedError
 
     def get_status(self):

@@ -1,13 +1,11 @@
 import os
 from .interface import CompilerInterface
-from ..isolation.isolate import Isolate
 
 
 class CompilerPython(CompilerInterface):
-    def compile(self):
+    def compile(self, isol):
         self._binarypath = self.sourcepath
         sp = self.sourcepath
-        isol = Isolate()
         command = '/usr/bin/python3'
         args = ['-m', 'py_compile', os.path.basename(sp)]
         envvars = ['PATH=/usr/bin', 'HOME=/box']

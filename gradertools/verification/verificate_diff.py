@@ -1,23 +1,26 @@
 import shutil
 import os
+import filecmp
 from .interface import VerificateInterface
-from ..isolation.isolate import Isolate
 
 
 class VerificateDiff(VerificateInterface):
-    def verificate(self):
+    def verificate(self,isol):
 
-        infile = self.inputfile
         outfile = self.outputfile
         correctoutput = self.correctoutput
+        print(filecmp.cmp(outfile,correctoutput))
+        if filecmp.cmp(outfile,correctoutput):
+            self._status = 'OK'
+        else:
+            self._status = 'WA'
+            command = './progdiff'
+            args = [ os.path.basename(correctoutput),  os.path.basename(outfile), 'náš', 'tvoj']
+            isol.isolate(files=['./progdiff-1.0/progdiff', outfile, correctoutput], command=command, parameters=args, stdoutfile='diffout.out')
 
-        isol = Isolate()
-        command = '../progdiff/progdiff'
-        args = [ os.path.basename(correctoutput),  os.path.basename(outfile), 'náš', 'tvoj']
-        isol.isolate(files=['../progdiff/progdiff', outfile, correctoutput], command=command, parameters=args, stdoutfile='output.out')
 
+            box=isol.boxdir
+            self._message = open(os.path.join(box, 'diffout.out'), 'r').read()
 
-        box=isol.boxdir
-        self._message = open(os.path.join(box, 'output.out'), 'r').read()
-
-        isol.clean()
+            #isol.clean()
+        filecmp.clear_cache()

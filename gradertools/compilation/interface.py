@@ -6,7 +6,7 @@ class CompilerInterface:
         self._status = None
         self._error = None
     
-    def compile(self):
+    def compile(self, isolator):
         raise NotImplementedError
     
     def get_binarypath(self):

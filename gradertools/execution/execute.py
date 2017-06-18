@@ -4,18 +4,17 @@ from .execute_binary import ExecuteBinary
 
 
 class Execute:
-    def __init__(self, binarypath, inputfile, outputfile):
-        extension = os.path.splitext(binarypath)[-1]
-
-        if extension == '.py':
+    def __init__(self, binarypath, inputfile, outputfile, executor, isolator=None):
+        if executor == 'python':
             Executor = ExecutePython
         else:
             Executor = ExecuteBinary
 
+        self._isol = isolator
         self._exec = Executor(binarypath, inputfile, outputfile)
 
     def execute(self):
-        self._exec.execute()
+        self._exec.execute(self._isol)
 
     @property
     def status(self):

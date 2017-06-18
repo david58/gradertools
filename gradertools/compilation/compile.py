@@ -1,18 +1,21 @@
 import os
 from .compile_python import CompilerPython
 from .compile_cpp import CompilerCpp
+#from ..isolation.isolate import Isolate
 
 
 class Compile:
-    def __init__(self, sourcepath):
-        extension = os.path.splitext(sourcepath)[-1]
-
-        if extension == '.py':
+    def __init__(self, sourcepath, compiler, isolator=None):
+        if compiler == 'python':
             Compiler = CompilerPython
-        elif extension == '.cpp':
+        elif compiler == 'cpp':
             Compiler = CompilerCpp
         else:
             raise Exception('Unknown Language')
+#        if isolator is None:
+#            self._isol = Isolate()
+#        else:
+        self._isol = isolator
 
         self._comp = Compiler(sourcepath)
         
@@ -29,4 +32,4 @@ class Compile:
         return self._comp.get_error()
 
     def compile(self):
-        self._comp.compile()
+        self._comp.compile(self._isol)

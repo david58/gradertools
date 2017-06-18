@@ -1,4 +1,5 @@
 from .isolate_isolate import IsolateIsolate
+from .isolate_simple import IsolateSimple
 
 
 class Isolate:
@@ -7,6 +8,8 @@ class Isolate:
             isolator = 'isolate'
         if isolator == 'isolate':
             Isolator = IsolateIsolate
+        elif isolator == 'simple':
+            Isolator = IsolateSimple
         else:
             raise Exception('Unknown Isolator')
 
