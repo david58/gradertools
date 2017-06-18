@@ -24,26 +24,19 @@ if __name__ == "__main__":
         print('Compilation successful')
         bp = c.binarypath
 
+# temorary
+        from collections import defaultdict
+        batch_results = defaultdict(lambda: 'OK')
+
         for test_input in sorted(os.listdir(os.path.join(task,'test'))):
             if not (test_input.endswith('.in')):
                 continue
 
-            group = test_input[: test_input.index('.')]
-            if group != lastgroup:
-                lastgroup = group
-            subgroup = vstup[vstup.index('.') + 1: -3]
-            print(' ' + subgroup, end='')
-            sys.stdout.flush()
-
-            vystup = vstup[:-3] + '.out'
-            batch = vstup.split('.')[0]
-            if mode == testing_mode.BATCH and batch_results[batch] != 'OK' and vstup.count(
-                    '.sample.') == 0 and vstup.count('.example.') == 0:
-                # print( 'skipped (batch already failed)' )
-                print(' skip ;', end='')
-                sys.stdout.flush()
-                all_tests_cfg.add_section(vstup)
-                all_tests_cfg[vstup]['status'] = 'IG'
+            vystup = test_input[:-3] + '.out'
+            batch = test_input.split('.')[0]
+            if batch_results[batch] != 'OK' and test_input.count(
+                    '.sample.') == 0 and test_input.count('.example.') == 0:
+                status = 'IG'
                 continue
 
 
